@@ -1,5 +1,6 @@
 package part03;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -43,6 +44,28 @@ public class PostalCodesMain {
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
 
         // TODO: Implement your logic here
+        System.out.println();
+
+        if (answer.matches("[0-9]{5}")) {
+            String city = PostalCodesReader.returnCity(answer, postalCodes);
+            if (city == null) {
+                System.out.println("Postal code not found.");
+            } else {
+                System.out.println("Post office: " + city);
+            }
+        } else {
+            List<String> codes = PostalCodesReader.returnPostalCodes(answer, postalCodes);
+            if (codes.isEmpty()) {
+                System.out.println("Postal codes not found.");
+            } else {
+                String codesString = "";
+                for (String code : codes) {
+                    codesString += code + ", ";
+                }
+                System.out.println("Postal codes: " + codesString.substring(0, codesString.length() - 2));
+
+            }
+        }
 
         scanner.close();
     }
